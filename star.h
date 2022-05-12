@@ -12,22 +12,26 @@
 
 
 
-class star
+class Star
 {
 public:
-	void setPosition();
+	// constructor
+	Star(Point position);
 
-	int getX();
+	// setters
+	void setPosition(Point newPosition) { this->position = newPosition; }
+	void setPhase(int newPhase) { this->phase = newPhase; }
 
-	int getY();
-
-	int getPhase();
+	// getters
+	double getX()       const { return position.getX(); }
+	double getY()       const { return position.getY(); }
+	int getPhase() const { return this->phase; }
 
 private:
 	Point position;
 
 	int phase;
 
-	void incrementPhase();
+	void incrementPhase(int & phase);
 
 };
