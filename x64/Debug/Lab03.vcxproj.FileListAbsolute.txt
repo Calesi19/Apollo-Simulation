@@ -1,1 +1,2 @@
 C:\Users\Carlos Lespin\Google Drive\Code\LanderSimulation\230.03.Lab.GLDemo\x64\Debug\Lab03.exe
+C:\Users\Carlos Lespin\Google Drive\Code\ApolloProgram\x64\Debug\Lab03.exe

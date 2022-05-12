@@ -73,6 +73,8 @@ void callBack(const Interface *pUI, void * p)
    gout.setPosition(Point(30.0, 30.0));
    gout << "Demo (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
 
+
+
    // #LM stats/details/status
 
    // draw our little star

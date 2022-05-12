@@ -27,7 +27,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ground.h" />
+    <ClInclude Include="lm.h" />
     <ClInclude Include="point.h" />
+    <ClInclude Include="star.h" />
     <ClInclude Include="uiDraw.h" />
     <ClInclude Include="uiInteract.h" />
   </ItemGroup>

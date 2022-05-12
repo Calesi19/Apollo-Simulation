@@ -17,12 +17,12 @@ using namespace std;
 class LM {
 
 private:
-	Point position;
-	double angle;
-	double fuel;
+	Point *position = new Point(200, 200);
+	double angle = 0;
+	double fuel = 5000;
 	double weight;
 	double thrust;
-	double velocity;
+	double velocity = 12.91; //static for now
 
 public:
 	double getX();
@@ -31,7 +31,7 @@ public:
 
 	double getAngle();
 
-	void updateAngle(string userInput);
+	void updateAngle(double value);
 
 	double getThrust();
 
@@ -41,7 +41,9 @@ public:
 
 	double getVelocity();
 
-	void updatePosition();
+	void updateXPosition(double value);
+
+	void updateYPosition(double value);
 
 	void updateFuel();
 
