@@ -10,24 +10,24 @@
 #pragma once
 #include "point.h"   // for Point
 
+
+
+class star
 {
-	class star
-	{
-	public:
-		void setPosition();
+public:
+	void setPosition();
 
-		int getX();
+	int getX();
 
-		int getY();
+	int getY();
 
-		int getPhase();
+	int getPhase();
 
-	private:
-		point position;
+private:
+	Point position;
 
-		int phase;
+	int phase;
 
-		void incrementPhase();
+	void incrementPhase();
 
-	};
-}
+};
