@@ -1,8 +1,15 @@
+/***********************************************************************
+ * Header File:
+ *    Star : Represents the stars in the background of the lunar lander game
+ * Author:
+ *    Braxton Meyer
+ * Summary:
+ *    Where the star is located and what phase of blinking it is in
+ ************************************************************************/
 
+#pragma once
+#include "point.h"   // for Point
 
-
-// star.h
-namespace Apollo11
 {
 	class star
 	{
@@ -17,6 +24,7 @@ namespace Apollo11
 
 	private:
 		point position;
+
 		int phase;
 
 		void incrementPhase();
