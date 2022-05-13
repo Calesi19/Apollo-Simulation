@@ -17,7 +17,7 @@ using namespace std;
 class LM {
 
 private:
-	Point *position = new Point(200, 200);
+
 	double angle = 0;
 	double fuel = 5000;
 	double weight;
@@ -25,6 +25,8 @@ private:
 	double velocity = 12.91; //static for now
 
 public:
+
+	Point position = Point(200, 200);
 	double getX();
 
 	double getY();

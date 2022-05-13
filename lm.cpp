@@ -37,11 +37,11 @@ double LM::getVelocity() {
 }
 
 void LM::updateXPosition(double value) {
-	this->position.addX(value)
+	this->position.addX(value);
 }
 
 void LM::updateYPosition(double value) {
-	this->position.addY(value)
+	this->position.addY(value);
 }
 
 void LM::updateFuel() {
@@ -49,7 +49,6 @@ void LM::updateFuel() {
 }
 
 void LM::updateVelocity() {
-	return 0; //placeholder
 
 }
 

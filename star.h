@@ -27,10 +27,10 @@ public:
 	double getY()       const { return position.getY(); }
 	int getPhase() const { return this->phase; }
 
-private:
 	Point position;
-
 	int phase;
+
+private:
 
 	void incrementPhase(int & phase);
 
