@@ -25,7 +25,7 @@ public:
 	// getters
 	double getX()       const { return position.getX(); }
 	double getY()       const { return position.getY(); }
-	int getPhase() const { return this->phase; }
+	int getPhase();
 
 	Point position;
 	int phase;

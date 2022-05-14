@@ -7,7 +7,7 @@
  *    Where the star is located and what phase of blinking it is in
  ************************************************************************/
 
-
+#include <stdlib.h> 
 #include "star.h"
 
  /******************************************
@@ -18,11 +18,17 @@
 
 Star::Star(Point newPosition)
 {
-	this->phase = 0;
+	this->phase = rand() % 207 +1;
 	this->position = newPosition;
 }
 
 void Star::incrementPhase(int& phase)
 {
 	phase++;
+}
+
+int Star::getPhase()
+{
+	this->phase += 1;
+	return this->phase;
 }

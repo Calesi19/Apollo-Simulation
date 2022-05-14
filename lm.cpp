@@ -36,6 +36,10 @@ double LM::getVelocity() {
 	return this->velocity;
 }
 
+double LM::getFuel() {
+	return this->fuel;
+}
+
 void LM::updateXPosition(double value) {
 	this->position.addX(value);
 }

@@ -47,6 +47,8 @@ public:
 
 	void updateYPosition(double value);
 
+	double getFuel();
+
 	void updateFuel();
 
 	void updateVelocity();

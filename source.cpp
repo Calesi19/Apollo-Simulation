@@ -10,7 +10,28 @@
 #include "ground.h"
 #include "star.h"
 #include "lm.h"
+#include <stdlib.h> 
+#include <vector>
+
+
 using namespace std;
+
+
+vector<Star> createStars(int amount) {
+
+    vector<Star> stars;
+    int randX;
+    int randY;
+
+    for (int c = 0; c <= amount; c ++) {
+        randX = rand() % 400 + 1;
+        randY = rand() % 400 + 200;
+        stars.push_back(Star(Point(randX, randY)));
+    }
+    
+    return stars;
+}
+
 
 /*************************************************************************
  * Demo
@@ -23,13 +44,14 @@ public:
         ground(ptUpperRight)
     {
     
-        
     }
 
     LM ship;
+    vector<Star> stars = createStars(50);
 
-    Point starPosition = Point(ptUpperRight.getX() - 20.0, ptUpperRight.getY() - 20.0);
-    Star star1 = Star(starPosition);
+
+    //Point starPosition = Point(ptUpperRight.getX() - 20.0, ptUpperRight.getY() - 20.0);
+    //Star star1 = Star(starPosition);
 
     // this is just for test purposes.  Don't make member variables public!
     Point ptUpperRight;   // size of the screen
@@ -52,21 +74,32 @@ void callBack(const Interface* pUI, void* p)
     // is the first step of every single callback function in OpenGL. 
     Game* pGame = (Game*)p;
 
+    // draw our little star
+    for (int i = 0; i < pGame->stars.size(); i++) {
+        gout.drawStar(pGame->stars[i].position, pGame->stars[i].getPhase());
+    }
+
+    // draw the ground
+    pGame->ground.draw(gout);
 
     // input
-    if (pUI->isRight())
+    if (pUI->isRight()) {
         pGame->ship.updateAngle(-0.1);
-    if (pUI->isLeft())
+        pGame->ship.updateXPosition(1);
+    }
+    if (pUI->isLeft()) {
         pGame->ship.updateAngle(0.1);
+        pGame->ship.updateXPosition(-1);
+    }
+
     if (pUI->isDown())
         pGame->ship.updateYPosition(1);
     else
         pGame->ship.updateYPosition(-1);
 
-    //
 
-    // draw the ground
-    pGame->ground.draw(gout);
+
+    
 
     // draw the lander and its flames
     gout.drawLander(pGame->ship.position /*position*/, pGame->ship.getAngle() /*angle*/);
@@ -74,15 +107,9 @@ void callBack(const Interface* pUI, void* p)
         pUI->isDown(), pUI->isLeft(), pUI->isRight());
 
     // put some text on the screen
-    gout.setPosition(Point(30.0, 30.0));
-    gout << "Demo2 (" << (int)pGame->ship.getX() << ", " << (int)pGame->ship.getY() << ")" << "\n";
+    gout.setPosition(Point(10.0, 380.0));
+    gout << "Fuel: " << pGame->ship.getFuel() << "\nAltitude: " << pGame->ship.getY() << " meters\nSpeed: " << pGame->ship.getVelocity() << " m/s";
 
-
-
-    // #LM stats/details/status
-
-    // draw our little star
-    gout.drawStar(pGame->star1.position, pGame->star1.phase++);
 }
 
 /*********************************
