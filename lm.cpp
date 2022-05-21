@@ -25,34 +25,37 @@ double LM::getThrust() {
 }
 
 double LM::getXVelocity() {
-	return this->getVelocity() * sin(this->getAngle());
+	return this->xVelocity;
 }
 
 double LM::getYVelocity() {
-	return this->getVelocity() * cos(this->getAngle());
-}
-
-double LM::getVelocity() {
-	return this->velocity;
+	return this->yVelocity;
 }
 
 double LM::getFuel() {
 	return this->fuel;
 }
 
-void LM::updateXPosition(double value) {
-	this->position.addX(value);
+void LM::updateXPosition() {
+	this->position.addX(this->xVelocity);
 }
 
-void LM::updateYPosition(double value) {
-	this->position.addY(value);
+void LM::updateYPosition() {
+	this->position.addY(this->yVelocity);
 }
 
 void LM::updateFuel() {
-	this->fuel -= 1;
+	this->fuel -= 10;
 }
 
-void LM::updateVelocity() {
-
+void LM::updateXVelocity(double value) {
+	this->xVelocity += value;
 }
+
+void LM::updateYVelocity(double value) {
+	this->yVelocity += value;
+}
+
+
+
 

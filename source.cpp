@@ -12,7 +12,8 @@
 #include "lm.h"
 #include <stdlib.h> 
 #include <vector>
-
+#include <cstdlib>
+#include <Windows.h>
 
 using namespace std;
 
@@ -82,24 +83,70 @@ void callBack(const Interface* pUI, void* p)
     // draw the ground
     pGame->ground.draw(gout);
 
-    // input
-    if (pUI->isRight()) {
-        pGame->ship.updateAngle(-0.1);
-        pGame->ship.updateXPosition(1);
+
+    if (pGame->ship.getFuel() > 0) {
+
+        // input
+        if (pUI->isRight()) {
+            pGame->ship.updateAngle(-0.1);
+        }
+        if (pUI->isLeft()) {
+            pGame->ship.updateAngle(0.1);
+        }
+
+        if (pUI->isDown()) {
+            // Break thrust into x and y components
+            pGame->ship.updateYVelocity(.29 * cos(pGame->ship.getAngle()));
+            pGame->ship.updateXVelocity(.29 * -sin(pGame->ship.getAngle()));
+            pGame->ship.updateFuel();
+        }
     }
-    if (pUI->isLeft()) {
-        pGame->ship.updateAngle(0.1);
-        pGame->ship.updateXPosition(-1);
+
+    pGame->ship.updateYPosition();
+    pGame->ship.updateXPosition();
+
+
+
+    if (pGame->ship.getYVelocity() > -5 && pGame->ground.onPlatform(pGame->ship.position, 1)) {
+        gout.setPosition(Point(150.0, 380.0));
+        gout << "Successful Landing";
+        
+        cout << "Success" << endl;
+        
+        Sleep(5000);
+        gout << "Successful Landing";
+        Sleep(1000);
+        exit(0);
+        
+    }
+    else if (pGame->ground.hitGround(pGame->ship.position, 20)) {
+        gout.setPosition(Point(150.0, 380.0));
+        gout << "Crash Landing";
+        
+        cout << "Crashed" << endl;
+        pGame->ship.updateYVelocity(-pGame->ship.getYVelocity());
+        pGame->ship.updateXVelocity(-pGame->ship.getXVelocity());
+        gout.setPosition(Point(150.0, 380.0));
+        gout << "Crash Landing";
+        Sleep(1000);
+        gout << "Crash Landing";
+        Sleep(3000);
+
+        Point ptUpperRight(400.0, 400.0);
+        Interface ui(0, NULL,
+            "Open GL Window",
+            ptUpperRight);
+
+        // Initialize the game class
+        Game game(ptUpperRight);
+        ui.run(callBack, &game);
+        }
+    else {
+        pGame->ship.updateYVelocity(-0.1625);
     }
 
-    if (pUI->isDown())
-        pGame->ship.updateYPosition(1);
-    else
-        pGame->ship.updateYPosition(-1);
 
 
-
-    
 
     // draw the lander and its flames
     gout.drawLander(pGame->ship.position /*position*/, pGame->ship.getAngle() /*angle*/);
@@ -108,7 +155,7 @@ void callBack(const Interface* pUI, void* p)
 
     // put some text on the screen
     gout.setPosition(Point(10.0, 380.0));
-    gout << "Fuel: " << pGame->ship.getFuel() << "\nAltitude: " << pGame->ship.getY() << " meters\nSpeed: " << pGame->ship.getVelocity() << " m/s";
+    gout << "Fuel: " << pGame->ship.getFuel() << "\nAltitude: " << pGame->ship.getY() << " meters\nSpeed: " << abs (pGame->ship.getYVelocity()) << " m/s";
 
 }
 
@@ -127,18 +174,23 @@ int WINAPI wWinMain(
 #else // !_WIN32
 int main(int argc, char** argv)
 #endif // !_WIN32
-{
-    // Initialize OpenGL
-    Point ptUpperRight(400.0, 400.0);
-    Interface ui(0, NULL,
-        "Open GL Window",
-        ptUpperRight);
+{   
 
-    // Initialize the game class
-    Game game(ptUpperRight);
+    while (true) {
+        // Initialize OpenGL
+        Point ptUpperRight(400.0, 400.0);
+        Interface ui(0, NULL,
+            "Open GL Window",
+            ptUpperRight);
 
-    // set everything into action
-    ui.run(callBack, &game);
+        // Initialize the game class
+
+        Game game(ptUpperRight);
+        // set everything into action
+
+        ui.run(callBack, &game);
+    }
+    
 
     return 0;
 }

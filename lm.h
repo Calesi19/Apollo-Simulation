@@ -22,11 +22,13 @@ private:
 	double fuel = 5000;
 	double weight;
 	double thrust;
-	double velocity = 12.91; //static for now
+	double xVelocity;
+	double yVelocity;
 
 public:
 
-	Point position = Point(200, 200);
+	Point position = Point(200, 350);
+
 	double getX();
 
 	double getY();
@@ -41,16 +43,16 @@ public:
 
 	double getYVelocity();
 
-	double getVelocity();
+	void updateXVelocity(double value);
 
-	void updateXPosition(double value);
+	void updateYVelocity(double value);
 
-	void updateYPosition(double value);
+	void updateXPosition();
+
+	void updateYPosition();
 
 	double getFuel();
 
 	void updateFuel();
-
-	void updateVelocity();
 
 };
