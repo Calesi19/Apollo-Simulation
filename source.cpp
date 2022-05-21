@@ -85,17 +85,24 @@ void callBack(const Interface* pUI, void* p)
     // input
     if (pUI->isRight()) {
         pGame->ship.updateAngle(-0.1);
-        pGame->ship.updateXPosition(1);
     }
     if (pUI->isLeft()) {
         pGame->ship.updateAngle(0.1);
-        pGame->ship.updateXPosition(-1);
     }
 
     if (pUI->isDown())
-        pGame->ship.updateYPosition(1);
-    else
-        pGame->ship.updateYPosition(-1);
+    {
+        // Break thrust into x and y components
+        pGame->ship.updateYVelocity(.29 * cos(pGame->ship.getAngle()));
+        pGame->ship.updateXVelocity(.29 * -sin(pGame->ship.getAngle()));
+    }
+    // Always account for gravity
+    pGame->ship.updateYVelocity(-0.1625);
+
+    // Update the ship's position based on velocity
+    pGame->ship.updateXPosition();
+    pGame->ship.updateYPosition();
+
 
 
 
@@ -108,7 +115,7 @@ void callBack(const Interface* pUI, void* p)
 
     // put some text on the screen
     gout.setPosition(Point(10.0, 380.0));
-    gout << "Fuel: " << pGame->ship.getFuel() << "\nAltitude: " << pGame->ship.getY() << " meters\nSpeed: " << pGame->ship.getVelocity() << " m/s";
+    gout << "Fuel: " << pGame->ship.getFuel() << "\nAltitude: " << pGame->ship.getY() << " meters\nSpeed: " << pGame->ship.getYVelocity() << " m/s";
 
 }
 
