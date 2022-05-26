@@ -1,5 +1,11 @@
 /**********************************************************************
- * GL Demo
+* LAB 5: APOLLO 11 CODE COMPLETE
+* BRAXTON MEYER AND CARLOS LESPIN
+* 
+* 
+* 
+* 
+ * GL Game
  * Just a simple program to demonstrate how to create an Open GL window,
  * draw something on the window, and accept simple user input
  **********************************************************************/
@@ -114,22 +120,18 @@ void callBack(const Interface* pUI, void* p)
         cout << "Success" << endl;
         
         Sleep(5000);
-        gout << "Successful Landing";
-        Sleep(1000);
+      
         exit(0);
         
     }
     else if (pGame->ground.hitGround(pGame->ship.position, 20)) {
-        gout.setPosition(Point(150.0, 380.0));
-        gout << "Crash Landing";
         
         cout << "Crashed" << endl;
         pGame->ship.updateYVelocity(-pGame->ship.getYVelocity());
         pGame->ship.updateXVelocity(-pGame->ship.getXVelocity());
         gout.setPosition(Point(150.0, 380.0));
         gout << "Crash Landing";
-        Sleep(1000);
-        gout << "Crash Landing";
+    
         Sleep(3000);
 
         Point ptUpperRight(400.0, 400.0);
