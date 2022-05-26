@@ -2,7 +2,7 @@
  * Header File:
  *    Star : Represents the stars in the background of the lunar lander game
  * Author:
- *    Braxton Meyer
+ *    Braxton Meyer and Carlos Lespin
  * Summary:
  *    Where the star is located and what phase of blinking it is in
  ************************************************************************/
@@ -25,8 +25,9 @@ public:
 	// getters
 	double getX()       const { return position.getX(); }
 	double getY()       const { return position.getY(); }
-	int getPhase();
-
+	int getPhase(); // Outlined in star.cpp
+	
+	// Position and phase variables
 	Point position;
 	int phase;
 
